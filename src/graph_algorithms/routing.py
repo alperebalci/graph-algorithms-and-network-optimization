@@ -473,10 +473,11 @@ class CustomizableContractionHierarchy:
         cur = meet
         while cur != target:
             parent = pt[cur]
-            # pt follows target -> higher rank. Reverse orientation for meet -> target.
+            # pt maps a higher-ranked node to its predecessor on target -> meet.
+            # Walking those predecessors from meet therefore already yields
+            # the correct meet -> target orientation.
             right_pairs.append((cur, parent))
             cur = parent
-        right_pairs = [(b, a) for a, b in reversed(right_pairs)]
 
         path: list[Hashable] = [source]
         for a, b in left_pairs + right_pairs:
