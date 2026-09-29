@@ -162,6 +162,20 @@ A July 2026 result solves directed SSSP with **real-valued, possibly negative** 
 - Repository status: **Research frontier**
 - Reference: https://arxiv.org/abs/2607.19346
 
+### Deterministic exact fully-dynamic minimum cut
+
+A SODA 2026 result gives deterministic subpolynomial update time for exact fully-dynamic minimum cut when the minimum-cut size is in a superpolylogarithmic regime; combined with sparsification it also yields a randomized fully-dynamic weighted (1+epsilon)-approximation.
+
+- Repository status: **Research frontier**
+- Reference: https://arxiv.org/abs/2512.13105
+
+### Incremental shortest paths in almost-linear total time
+
+A deterministic modified interior-point method maintains (1+epsilon)-approximate SSSP distances under directed edge insertions in total time `m^(1+o(1)) log W` for the stated epsilon regime.
+
+- Repository status: **Research frontier / STOC 2026**
+- Reference: https://arxiv.org/abs/2506.19207
+
 ### Dense Bellman-Ford in almost-quadratic time
 
 For dense directed graphs with real-valued possibly negative weights, SSSP was improved to `n^(2+o(1))`.
@@ -207,6 +221,13 @@ The positive-weight directed next-to-shortest-path problem received a polynomial
 
 - Repository status: **Research frontier / accepted**
 - Reference: https://arxiv.org/abs/2511.04345
+
+### Shortcutting for negative-weight SSSP
+
+The shortcutting line for real-valued negative-weight SSSP was presented at STOC 2026 and is a direct predecessor of the July 2026 almost-linear Bellman-Ford result.
+
+- Repository status: **Research frontier**
+- Reference: https://arxiv.org/abs/2511.12714
 
 ### Polylogarithmic worst-case dynamic connectivity / MST / 2-edge connectivity
 

@@ -118,6 +118,8 @@ The dated research index is maintained in [LAST_DECADE_2016_2026.md](LAST_DECADE
 Research results tracked as of 2026-09-30, without pretending they are compact textbook routines:
 
 - real-valued negative-weight SSSP in `m^(1+o(1))`;
+- deterministic exact fully-dynamic min-cut in the SODA 2026 cut-size regime;
+- deterministic almost-linear-total-time incremental approximate SSSP;
 - dense negative-weight SSSP in `n^(2+o(1))`;
 - faster weak expander decompositions and approximate max flow;
 - semi-streaming `(Delta-1)` coloring beyond Brooks;

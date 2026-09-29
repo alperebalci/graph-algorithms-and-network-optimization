@@ -168,3 +168,18 @@ As of this coverage date, FOCS 2026 is still upcoming (November 8–11, 2026), b
 Accepted-paper index: https://focs.computer.org/2026/accepted-papers/
 
 The dated summary is maintained in [LAST_DECADE_2016_2026.md](LAST_DECADE_2016_2026.md).
+
+
+### Exact fully-dynamic minimum cut (SODA 2026)
+
+El-Hayek, Henzinger, and Li obtain deterministic subpolynomial update time for exact fully-dynamic min-cut under a superpolylogarithmic cut-size regime, together with a sparsification-based dynamic weighted approximation result.
+
+- arXiv: https://arxiv.org/abs/2512.13105
+
+### Incremental shortest paths via a modified interior-point method (STOC 2026)
+
+Yang P. Liu gives a deterministic algorithm maintaining (1+epsilon)-approximate SSSP under directed edge insertions in almost-linear total time for the stated epsilon regime.
+
+- arXiv: https://arxiv.org/abs/2506.19207
+
+These results reinforce the repository policy that dynamic graph breakthroughs should be documented separately until their supporting data-structure and interior-point machinery is implemented faithfully.
