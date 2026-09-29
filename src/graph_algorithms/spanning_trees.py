@@ -63,3 +63,47 @@ def prim(graph: WeightedGraph[Node], start: Node | None = None) -> tuple[float, 
     if len(seen) != len(nodes):
         raise DisconnectedGraphError("graph is disconnected")
     return total, tree
+
+
+
+def boruvka(
+    vertices: Iterable[Node], edges: Sequence[Edge[Node]]
+) -> tuple[float, list[Edge[Node]]]:
+    """Boruvka minimum spanning tree for a connected undirected graph.
+
+    Each phase adds the cheapest outgoing edge of every current component.
+    There are O(log V) phases, each scanning all edges: O(E log V).
+    """
+    nodes = list(dict.fromkeys(vertices))
+    if not nodes:
+        return 0.0, []
+
+    dsu = DisjointSet(nodes)
+    components = len(nodes)
+    tree: list[Edge[Node]] = []
+    total = 0.0
+
+    while components > 1:
+        cheapest: dict[Node, Edge[Node]] = {}
+        for u, v, w in edges:
+            ru, rv = dsu.find(u), dsu.find(v)
+            if ru == rv:
+                continue
+            if ru not in cheapest or w < cheapest[ru][2]:
+                cheapest[ru] = (u, v, w)
+            if rv not in cheapest or w < cheapest[rv][2]:
+                cheapest[rv] = (u, v, w)
+
+        merged = 0
+        for edge in list(cheapest.values()):
+            u, v, w = edge
+            if dsu.union(u, v):
+                tree.append(edge)
+                total += w
+                components -= 1
+                merged += 1
+
+        if merged == 0:
+            raise DisconnectedGraphError("graph is disconnected")
+
+    return total, tree

@@ -163,3 +163,83 @@ def dinic(capacity: CapacityGraph[Node], source: Node, sink: Node) -> FlowResult
             value += pushed
 
     return FlowResult(value, _extract_flow(capacity, residual))
+
+
+
+def push_relabel(
+    capacity: CapacityGraph[Node], source: Node, sink: Node
+) -> FlowResult:
+    """Goldberg-Tarjan preflow-push maximum flow.
+
+    Uses FIFO active vertices with admissible pushes and relabel operations.
+    This compact reference implementation has an O(V^2 E) worst-case bound.
+    """
+    residual, nodes = _residual(capacity)
+    if source not in nodes or sink not in nodes:
+        raise KeyError("source and sink must be graph nodes")
+    if source == sink:
+        return FlowResult(0.0, _extract_flow(capacity, residual))
+
+    height = {u: 0 for u in nodes}
+    excess = {u: 0.0 for u in nodes}
+    height[source] = len(nodes)
+    active: deque[Node] = deque()
+    in_queue: set[Node] = set()
+
+    def enqueue(u: Node) -> None:
+        if (
+            u != source
+            and u != sink
+            and excess[u] > 1e-15
+            and u not in in_queue
+        ):
+            active.append(u)
+            in_queue.add(u)
+
+    for v, cap in list(residual[source].items()):
+        if cap <= 1e-15:
+            continue
+        residual[source][v] -= cap
+        residual[v][source] += cap
+        excess[source] -= cap
+        excess[v] += cap
+        enqueue(v)
+
+    node_list = list(nodes)
+    while active:
+        u = active.popleft()
+        in_queue.discard(u)
+
+        while excess[u] > 1e-15:
+            pushed = False
+            for v in node_list:
+                if (
+                    residual[u][v] > 1e-15
+                    and height[u] == height[v] + 1
+                ):
+                    delta = min(excess[u], residual[u][v])
+                    residual[u][v] -= delta
+                    residual[v][u] += delta
+                    excess[u] -= delta
+                    excess[v] += delta
+                    enqueue(v)
+                    pushed = True
+                    if excess[u] <= 1e-15:
+                        break
+
+            if excess[u] <= 1e-15:
+                break
+
+            if not pushed:
+                admissible_heights = [
+                    height[v]
+                    for v in node_list
+                    if residual[u][v] > 1e-15
+                ]
+                if not admissible_heights:
+                    break
+                height[u] = min(admissible_heights) + 1
+
+        enqueue(u)
+
+    return FlowResult(excess[sink], _extract_flow(capacity, residual))
