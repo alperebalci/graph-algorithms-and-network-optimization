@@ -90,11 +90,16 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - Exact chromatic number for small graphs
 - Brooks-theorem bound helper
 
-### Approximation
+### Approximation and classical graph optimization
 
 - Metric TSP double-tree 2-approximation
 - Christofides 1.5-approximation
 - Greedy Set Cover
+- 2-approximation for Minimum Vertex Cover
+- Exact bipartite Minimum Vertex Cover via Konig + Hopcroft-Karp
+- Deterministic 1-flip 1/2-approximation for weighted Max-Cut
+- Metric-closure 2-approximation for Steiner Tree
+- Exact small-instance undirected Chinese Postman / Route Inspection
 
 ### Planar and tree algorithms
 
@@ -207,6 +212,9 @@ src/graph_algorithms/
   matching.py
   coloring.py
   approximation.py
+  covering.py
+  steiner.py
+  postman.py
   planarity.py
   tree_algorithms.py
   disjoint_set.py

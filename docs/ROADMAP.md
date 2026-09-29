@@ -23,6 +23,10 @@ Completed:
 - Karp minimum mean cycle
 - Maximum Cardinality Search / chordality recognition
 - Bron-Kerbosch maximal clique enumeration
+- Minimum Vertex Cover 2-approximation and exact bipartite Konig cover
+- weighted Max-Cut 1/2 local-search approximation
+- Steiner Tree metric-closure 2-approximation
+- exact small-instance undirected Chinese Postman
 
 ## Phase B — dynamic and advanced structural layer
 

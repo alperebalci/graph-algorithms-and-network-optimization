@@ -28,6 +28,12 @@ from .approximation import (
     metric_tsp_2approx,
     tour_cost,
 )
+from .covering import (
+    MaxCutResult,
+    konig_minimum_vertex_cover,
+    max_cut_local_search,
+    vertex_cover_2approx,
+)
 from .coloring import (
     brooks_bound,
     exact_chromatic_number,
@@ -110,6 +116,7 @@ from .references import (
     vf2pp_isomorphism_reference,
     weighted_blossom_matching_reference,
 )
+from .postman import ChinesePostmanResult, undirected_chinese_postman
 from .shortest_paths import (
     astar,
     bellman_ford,
@@ -126,6 +133,7 @@ from .shortest_paths_extra import (
     zero_one_bfs,
 )
 from .spanning_trees import boruvka, kruskal, prim
+from .steiner import SteinerTreeResult, steiner_tree_2approx
 from .structural import BlockCutForest, BlockNode, block_cut_forest
 from .traversal import (
     bfs_order,
@@ -143,6 +151,14 @@ from .tree_algorithms import (
 
 __all__ = [
     "BinaryLiftingLCA",
+    "MaxCutResult",
+    "ChinesePostmanResult",
+    "SteinerTreeResult",
+    "konig_minimum_vertex_cover",
+    "max_cut_local_search",
+    "vertex_cover_2approx",
+    "undirected_chinese_postman",
+    "steiner_tree_2approx",
     "weisfeiler_lehman_graph_hash",
     "weisfeiler_lehman_refinement",
     "capacity_scaling_min_cost_reference",
