@@ -23,9 +23,12 @@ Status meanings:
 | Shortest path | DAG shortest path | Native | `O(V+E)`, negative weights allowed in DAGs |
 | k-shortest path | Yen | Native | loopless k-shortest paths |
 | Disjoint paths | Suurballe | Native | two edge-disjoint shortest directed paths |
-| Advanced routing | Contraction Hierarchies | Roadmap | preprocessing + very fast queries |
+| Advanced routing | ALT / Landmark A* | Native | landmark lower bounds + A* |
+| Advanced routing | Contraction Hierarchies | Native | exact, naive witness-search educational implementation |
+| Advanced routing | Dense CH Hub Labeling | Native | exact unpruned 2-hop labels derived from CH |
 | Advanced routing | Customizable Contraction Hierarchies | Roadmap | topology preprocessing + metric customization |
-| Advanced routing | Hub Labeling | Roadmap | label construction and query trade-offs |
+| Advanced routing | Optimized Hub Labeling | Roadmap | pruning/order engineering for compact labels |
+| Sparse graphs | Greedy weighted spanner | Native | t-spanner by shortest-path edge filtering |
 | MST | Prim | Native | `O(E log V)` |
 | MST | Kruskal | Native | `O(E log E)` + DSU |
 | MST | Boruvka | Native | `O(E log V)` |

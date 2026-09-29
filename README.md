@@ -23,6 +23,9 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - 0-1 BFS, Dial's algorithm, and DAG shortest paths
 - Yen k-shortest loopless paths
 - Suurballe two edge-disjoint shortest paths
+- ALT / Landmark A*
+- Exact educational Contraction Hierarchies
+- Dense CH-derived Hub Labeling
 
 ### Spanning trees, cycles, DAGs, and connectivity
 
@@ -55,6 +58,10 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - Hungarian assignment
 - Edmonds blossom for unweighted maximum-cardinality matching in general graphs
 - Gale-Shapley stable matching
+
+### Sparse graph infrastructure
+
+- Greedy weighted graph spanner
 
 ### Dynamic graphs and analytics
 
@@ -90,7 +97,7 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - Heavy-light decomposition
 - Centroid decomposition
 
-See [`docs/ALGORITHM_CATALOG.md`](docs/ALGORITHM_CATALOG.md) for status, complexity, caveats, and roadmap items.
+See [`docs/ALGORITHM_CATALOG.md`](docs/ALGORITHM_CATALOG.md) for status and complexity, [`docs/ROADMAP.md`](docs/ROADMAP.md) for staged implementation priorities, and [`docs/MODERN_RESEARCH_FRONTIER.md`](docs/MODERN_RESEARCH_FRONTIER.md) for 2016–2026 research context.
 
 ## Taxonomy corrections
 
@@ -174,6 +181,8 @@ src/graph_algorithms/
   link_cut_tree.py
   analytics.py
   references.py
+  routing.py
+  spanners.py
   spanning_trees.py
   cycles_and_dag.py
   connectivity.py
@@ -206,7 +215,7 @@ A new algorithm should not enter the catalog as “Native” until it has at lea
 - The min-cost routines use successive shortest augmenting paths with Bellman-Ford. They support negative edge costs but reject a reachable negative-cost residual cycle instead of silently returning a non-optimal result.
 - Christofides uses exact subset-DP minimum-weight perfect matching to remain self-contained. This preserves the approximation guarantee but makes that step exponential in the number of odd-degree MST vertices, so it is an educational/small-instance implementation rather than a large-scale TSP engine.
 - The planarity test/embedding is explicitly delegated to NetworkX; face walking from an already-known embedding is native.
-- Contraction Hierarchies, Customizable Contraction Hierarchies, Hub Labeling, SPQR decomposition, native weighted Blossom, cost-scaling min-cost flow, and native Network Simplex remain advanced roadmap items; reference adapters are used where explicitly documented.
+- The native Contraction Hierarchy and hub-label implementation are correctness-oriented educational versions, not road-network-scale preprocessors. Customizable Contraction Hierarchies, optimized/pruned Hub Labeling, SPQR decomposition, native weighted Blossom, cost-scaling min-cost flow, and native Network Simplex remain advanced roadmap items; reference adapters are used where explicitly documented.
 
 ## License
 

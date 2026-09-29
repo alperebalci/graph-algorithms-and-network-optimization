@@ -67,6 +67,16 @@ from .matching import (
     hungarian,
     kuhn_maximum_bipartite_matching,
 )
+from .routing import (
+    ContractionHierarchy,
+    DenseHubLabels,
+    LandmarkIndex,
+    alt_shortest_path,
+    build_contraction_hierarchy,
+    build_dense_hub_labels,
+    build_landmark_index,
+)
+from .spanners import greedy_spanner
 from .references import (
     leiden_communities_reference,
     louvain_communities_reference,
@@ -107,6 +117,14 @@ from .tree_algorithms import (
 
 __all__ = [
     "BinaryLiftingLCA",
+    "ContractionHierarchy",
+    "DenseHubLabels",
+    "LandmarkIndex",
+    "alt_shortest_path",
+    "build_contraction_hierarchy",
+    "build_dense_hub_labels",
+    "build_landmark_index",
+    "greedy_spanner",
     "BlockCutForest",
     "BlockNode",
     "GlobalMinCutResult",
