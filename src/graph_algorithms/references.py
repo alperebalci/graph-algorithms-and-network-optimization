@@ -182,3 +182,66 @@ def leiden_communities_reference(
         seed=seed,
     )
     return [{nodes[i] for i in community} for community in partition]
+
+
+
+def capacity_scaling_min_cost_reference(
+    capacity: Mapping[Node, Mapping[Node, float]],
+    cost: Mapping[Node, Mapping[Node, float]],
+    demands: Mapping[Node, float],
+) -> tuple[float, dict[Node, dict[Node, float]]]:
+    """Capacity-scaling successive-shortest-path min-cost flow via NetworkX."""
+    try:
+        import networkx as nx
+    except ImportError as exc:  # pragma: no cover
+        raise ImportError(
+            "install graph-algorithms-network-optimization[reference]"
+        ) from exc
+
+    g = nx.DiGraph()
+    nodes = set(capacity) | set(demands)
+    for neighbors in capacity.values():
+        nodes.update(neighbors)
+    for u in nodes:
+        g.add_node(u, demand=demands.get(u, 0))
+    for u, neighbors in capacity.items():
+        for v, cap in neighbors.items():
+            if u not in cost or v not in cost[u]:
+                raise ValueError(f"missing cost for edge {u!r}->{v!r}")
+            g.add_edge(
+                u,
+                v,
+                capacity=cap,
+                weight=cost[u][v],
+            )
+
+    total_cost, flow = nx.capacity_scaling(g)
+    return float(total_cost), {
+        u: {v: float(value) for v, value in neighbors.items()}
+        for u, neighbors in flow.items()
+    }
+
+
+def three_vertex_connected_components_reference(
+    graph: Mapping[Node, Iterable[Node]],
+) -> list[set[Node]]:
+    """Exact 3-node-connected components via NetworkX k_components.
+
+    This is a k-component decomposition, not an SPQR tree. SPQR additionally
+    records the triconnected decomposition structure and virtual edges.
+    """
+    try:
+        import networkx as nx
+    except ImportError as exc:  # pragma: no cover
+        raise ImportError(
+            "install graph-algorithms-network-optimization[reference]"
+        ) from exc
+
+    g = nx.Graph()
+    for u, neighbors in graph.items():
+        g.add_node(u)
+        for v in neighbors:
+            g.add_edge(u, v)
+
+    components = nx.k_components(g)
+    return [set(component) for component in components.get(3, [])]

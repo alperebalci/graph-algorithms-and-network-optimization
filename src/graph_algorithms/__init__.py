@@ -53,6 +53,10 @@ from .cycles_and_dag import (
 )
 from .disjoint_set import DisjointSet
 from .flow import FlowResult, dinic, edmonds_karp, ford_fulkerson, push_relabel
+from .hashing import (
+    weisfeiler_lehman_graph_hash,
+    weisfeiler_lehman_refinement,
+)
 from .link_cut_tree import LinkCutTree
 from .mincuts import (
     GlobalMinCutResult,
@@ -98,9 +102,11 @@ from .sparsification import (
     effective_resistance_sparsifier,
 )
 from .references import (
+    capacity_scaling_min_cost_reference,
     leiden_communities_reference,
     louvain_communities_reference,
     network_simplex_reference,
+    three_vertex_connected_components_reference,
     vf2pp_isomorphism_reference,
     weighted_blossom_matching_reference,
 )
@@ -137,6 +143,10 @@ from .tree_algorithms import (
 
 __all__ = [
     "BinaryLiftingLCA",
+    "weisfeiler_lehman_graph_hash",
+    "weisfeiler_lehman_refinement",
+    "capacity_scaling_min_cost_reference",
+    "three_vertex_connected_components_reference",
     "minimum_spanning_arborescence",
     "chordal_perfect_elimination_order",
     "is_chordal",

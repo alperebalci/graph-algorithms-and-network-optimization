@@ -33,7 +33,10 @@ Completed:
 - Link-Cut Tree
 - weighted Blossom reference adapter
 - Network Simplex reference adapter
+- capacity-scaling min-cost-flow reference adapter
+- exact 3-node-components reference adapter
 - VF2++ reference adapter
+- Weisfeiler-Lehman refinement/hash
 
 Still open:
 

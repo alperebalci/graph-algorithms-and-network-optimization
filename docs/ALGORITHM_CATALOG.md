@@ -75,7 +75,10 @@ Status meanings:
 | Matching | Gale-Shapley | Native | stable matching, `O(n^2)` |
 | Matching | Weighted Blossom | Reference adapter | NetworkX max-weight matching |
 | Min-cost flow | Network Simplex | Reference adapter | NetworkX network simplex |
+| Min-cost flow | Capacity-scaling SSP | Reference adapter | NetworkX capacity-scaling min-cost flow |
+| Connectivity | Exact 3-node-components | Reference adapter | NetworkX k-components; not an SPQR tree |
 | Isomorphism | VF2++ | Reference adapter | NetworkX VF2++ |
+| Isomorphism invariant | Weisfeiler-Lehman refinement/hash | Native | 1-WL refinement; not a complete isomorphism test |
 | Community detection | Louvain | Reference adapter | NetworkX Louvain |
 | Community detection | Leiden | Reference adapter | optional igraph + leidenalg |
 | Coloring | Greedy coloring | Native | order-dependent heuristic |
@@ -108,7 +111,7 @@ Status meanings:
 
 ## Why some advanced entries remain roadmap items
 
-The repository favors complete, testable implementations over name coverage. Contraction Hierarchies, Hub Labeling, and SPQR decomposition require non-trivial preprocessing invariants and deserve their own focused benchmark/test suites. They are explicitly tracked rather than represented by placeholders that merely raise `NotImplementedError`.
+The repository favors complete, testable implementations over name coverage. CH/CCH and dense hub labels now have native educational implementations. SPQR decomposition, optimized/pruned hub labeling, native weighted Blossom, cost-scaling push-relabel min-cost flow, and native Network Simplex still require dedicated invariants and benchmark suites; they remain explicit roadmap items rather than placeholder stubs.
 
 
 ## Research-frontier results tracked separately

@@ -78,7 +78,8 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - k-core decomposition
 - Triangle counting
 - Deterministic label-propagation communities
-- NetworkX reference adapters for weighted Blossom, Network Simplex, VF2++, and Louvain
+- Weisfeiler-Lehman refinement and graph hashing
+- NetworkX reference adapters for weighted Blossom, Network Simplex, capacity-scaling min-cost flow, exact 3-node-components, VF2++, and Louvain
 - Optional igraph/leidenalg reference adapter for Leiden community detection
 
 ### Coloring
@@ -116,7 +117,8 @@ Several items are often placed under misleading headings in generic graph-algori
 - **Brooks' theorem** is a theorem, not a coloring procedure. The code therefore exposes `brooks_bound` rather than a fictional “Brooks algorithm.”
 - **Set Cover** is a general combinatorial optimization problem. It is included in approximation methods, with that scope stated directly.
 - **R-trees** are spatial indexes rather than graph shortest-path algorithms, so they are not presented as such.
-- **Contraction Hierarchies**, **Hub Labeling**, and **SPQR / 3-connected decomposition** are tracked as roadmap items instead of being represented by incomplete stubs.
+- Exact 3-node-connected components are exposed through a reference adapter, while **SPQR decomposition** remains a separate roadmap item because an SPQR tree contains substantially more structure than a k-component listing.
+- CH/CCH and dense hub labels are native educational implementations; production-scale routing variants remain separately identified.
 
 ## Installation
 
@@ -192,6 +194,7 @@ src/graph_algorithms/
   dynamic_graphs.py
   link_cut_tree.py
   analytics.py
+  hashing.py
   references.py
   routing.py
   spanners.py
