@@ -5,7 +5,10 @@ from .analytics import (
     brandes_betweenness_centrality,
     core_numbers,
     hits,
+    label_propagation_communities,
     pagerank,
+    personalized_pagerank,
+    triangle_count,
 )
 from .dag_algorithms import transitive_closure, transitive_reduction_dag
 from .dominators import lengauer_tarjan_dominators
@@ -129,6 +132,9 @@ __all__ = [
     "BlockNode",
     "GlobalMinCutResult",
     "LinkCutTree",
+    "triangle_count",
+    "personalized_pagerank",
+    "label_propagation_communities",
     "RollbackDisjointSet",
     "block_cut_forest",
     "boruvka",

@@ -193,3 +193,130 @@ def core_numbers(graph: Graph[Node]) -> dict[Node, int]:
                 bins[du] += 1
                 degree[u] -= 1
     return degree
+
+
+
+def personalized_pagerank(
+    graph: Graph[Node],
+    personalization: Mapping[Node, float],
+    *,
+    damping: float = 0.85,
+    tolerance: float = 1e-10,
+    max_iterations: int = 1000,
+) -> dict[Node, float]:
+    """Personalized PageRank with an arbitrary non-negative teleport vector."""
+    if not 0.0 < damping < 1.0:
+        raise ValueError("damping must be strictly between 0 and 1")
+    nodes = _nodes(graph)
+    if not nodes:
+        return {}
+
+    teleport = {u: float(personalization.get(u, 0.0)) for u in nodes}
+    if any(value < 0 for value in teleport.values()):
+        raise ValueError("personalization weights must be non-negative")
+    total_teleport = sum(teleport.values())
+    if total_teleport <= 0:
+        raise ValueError("personalization must have positive total mass")
+    teleport = {
+        u: value / total_teleport for u, value in teleport.items()
+    }
+
+    outgoing = {u: list(graph.get(u, ())) for u in nodes}
+    rank = dict(teleport)
+
+    for _ in range(max_iterations):
+        dangling_mass = sum(
+            rank[u] for u in nodes if not outgoing[u]
+        )
+        new_rank = {
+            u: (1.0 - damping) * teleport[u]
+            + damping * dangling_mass * teleport[u]
+            for u in nodes
+        }
+        for u in nodes:
+            if not outgoing[u]:
+                continue
+            share = damping * rank[u] / len(outgoing[u])
+            for v in outgoing[u]:
+                new_rank[v] += share
+
+        error = sum(abs(new_rank[u] - rank[u]) for u in nodes)
+        rank = new_rank
+        if error <= tolerance:
+            break
+
+    total = sum(rank.values())
+    return {u: value / total for u, value in rank.items()}
+
+
+def triangle_count(graph: Graph[Node]) -> tuple[int, dict[Node, int]]:
+    """Count triangles in a simple undirected graph.
+
+    Returns the global triangle count and the number of incident triangles per
+    vertex. The orientation-by-degree scheme avoids triple enumeration of the
+    same triangle.
+    """
+    nodes = _nodes(graph)
+    neighbors = {u: set(graph.get(u, ())) - {u} for u in nodes}
+    for u in nodes:
+        for v in tuple(neighbors[u]):
+            neighbors.setdefault(v, set()).add(u)
+
+    order = sorted(nodes, key=lambda u: (len(neighbors[u]), repr(u)))
+    rank = {u: i for i, u in enumerate(order)}
+    forward = {
+        u: {v for v in neighbors[u] if rank[u] < rank[v]}
+        for u in nodes
+    }
+    local = {u: 0 for u in nodes}
+    total = 0
+    for u in nodes:
+        for v in forward[u]:
+            common = forward[u] & forward[v]
+            for w in common:
+                total += 1
+                local[u] += 1
+                local[v] += 1
+                local[w] += 1
+    return total, local
+
+
+def label_propagation_communities(
+    graph: Graph[Node],
+    *,
+    max_iterations: int = 100,
+) -> list[set[Node]]:
+    """Deterministic label-propagation community heuristic.
+
+    Ties are resolved by the original node order so repeated runs are stable.
+    """
+    nodes = _nodes(graph)
+    if not nodes:
+        return []
+    neighbors = {u: list(graph.get(u, ())) for u in nodes}
+    labels = {u: i for i, u in enumerate(nodes)}
+
+    for _ in range(max_iterations):
+        changed = False
+        for u in nodes:
+            counts: dict[int, int] = {}
+            for v in neighbors[u]:
+                label = labels[v]
+                counts[label] = counts.get(label, 0) + 1
+            if not counts:
+                continue
+            best_count = max(counts.values())
+            best_label = min(
+                label for label, count in counts.items()
+                if count == best_count
+            )
+            if labels[u] != best_label:
+                labels[u] = best_label
+                changed = True
+        if not changed:
+            break
+
+    communities: dict[int, set[Node]] = {}
+    for u in nodes:
+        communities.setdefault(labels[u], set()).add(u)
+    return list(communities.values())

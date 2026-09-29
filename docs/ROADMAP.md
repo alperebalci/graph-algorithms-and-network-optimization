@@ -71,11 +71,14 @@ Completed:
 - Louvain reference adapter
 - Leiden reference adapter
 
-Possible native additions:
+Completed additionally:
 
 - label propagation
 - triangle counting
 - personalized PageRank
+
+Still optional:
+
 - spectral clustering (would introduce a numerical dependency)
 
 ## Phase E — research frontier

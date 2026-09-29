@@ -67,9 +67,11 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 
 - Rollback DSU and offline dynamic connectivity
 - Link-Cut Tree with link/cut/connectivity/path-sum operations
-- PageRank and HITS
+- PageRank, Personalized PageRank, and HITS
 - Brandes betweenness centrality
 - k-core decomposition
+- Triangle counting
+- Deterministic label-propagation communities
 - NetworkX reference adapters for weighted Blossom, Network Simplex, VF2++, and Louvain
 - Optional igraph/leidenalg reference adapter for Leiden community detection
 

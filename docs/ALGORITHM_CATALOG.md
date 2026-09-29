@@ -92,9 +92,12 @@ Status meanings:
 | Dynamic graphs | Offline dynamic connectivity | Native | segment tree over time + rollback DSU |
 | Dynamic trees | Link-Cut Tree | Native | amortized `O(log V)` link/cut/path-sum |
 | Graph analytics | PageRank | Native | power iteration |
+| Graph analytics | Personalized PageRank | Native | teleport-vector power iteration |
 | Graph analytics | HITS | Native | power iteration |
 | Graph analytics | Brandes betweenness | Native | `O(VE)` unweighted |
 | Graph analytics | k-core decomposition | Native | `O(V+E)` |
+| Graph analytics | Triangle counting | Native | degree-oriented intersection scheme |
+| Community detection | Label propagation | Native | deterministic tie-breaking heuristic |
 | Spatial indexing | R-tree | Out of scope | spatial index, not itself a graph shortest-path algorithm |
 
 ## Why some advanced entries remain roadmap items
