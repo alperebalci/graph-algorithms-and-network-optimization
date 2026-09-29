@@ -36,6 +36,11 @@ Status meanings:
 | Max flow | Ford-Fulkerson | Native | DFS augmenting paths; integer-capacity termination guarantee |
 | Max flow | Edmonds-Karp | Native | `O(VE^2)` |
 | Max flow | Dinic | Native | `O(V^2E)` general bound |
+| Network optimization | Minimum s-t cut | Native | max-flow/min-cut using Dinic residual reachability |
+| Network optimization | Minimum-cost flow | Native | prescribed flow value; Bellman-Ford shortest augmenting paths |
+| Network optimization | Minimum-cost maximum flow | Native | successive shortest augmenting paths until no s-t path remains |
+| Network optimization | Feasible circulation | Native | lower/upper bounds + node demands via super-source/super-sink reduction |
+| Network optimization | Gomory-Hu tree | Native | all-pairs undirected min-cut representation using `V-1` s-t min-cut calls |
 | Matching | Kuhn | Native | bipartite matching via DFS augmentations |
 | Matching | Hopcroft-Karp | Native | `O(E sqrt(V))` |
 | Matching | Hungarian | Native | rectangular min-cost assignment, rows <= columns |

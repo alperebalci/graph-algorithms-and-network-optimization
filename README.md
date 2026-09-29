@@ -36,6 +36,11 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - Ford-Fulkerson
 - Edmonds-Karp
 - Dinic
+- Minimum s-t cut
+- Minimum-cost flow for a prescribed flow value
+- Minimum-cost maximum flow
+- Feasible circulation with lower/upper bounds and node demands
+- Gomory-Hu tree for all-pairs minimum cuts in undirected capacitated graphs
 - Kuhn bipartite matching
 - Hopcroft-Karp
 - Hungarian assignment
@@ -144,6 +149,7 @@ src/graph_algorithms/
   cycles_and_dag.py
   connectivity.py
   flow.py
+  network_optimization.py
   matching.py
   coloring.py
   approximation.py
@@ -161,13 +167,14 @@ docs/
 
 ## Correctness and test policy
 
-The initial test suite covers traversal, shortest paths, negative-cycle detection, MST agreement, SCC agreement, low-link algorithms, three max-flow implementations on the same benchmark network, bipartite/general matching, coloring, TSP approximations, LCA/tree decompositions, and planarity integration.
+The initial test suite covers traversal, shortest paths, negative-cycle detection, MST agreement, SCC agreement, low-link algorithms, three max-flow implementations on the same benchmark network, minimum cut, min-cost flow, lower-bound circulation, Gomory-Hu trees, bipartite/general matching, coloring, TSP approximations, LCA/tree decompositions, and planarity integration.
 
 A new algorithm should not enter the catalog as “Native” until it has at least one meaningful correctness test and its preconditions are documented. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Current limitations
 
-- The max-flow API is aimed at standard directed capacity networks; the test contract does not yet target pathological antiparallel-edge accounting cases.
+- The original max-flow API is aimed at standard directed capacity networks; the newer network-optimization residual engine separately supports antiparallel arcs for min-cut, circulation, min-cost flow, and Gomory-Hu reductions.
+- The min-cost routines use successive shortest augmenting paths with Bellman-Ford. They support negative edge costs but reject a reachable negative-cost residual cycle instead of silently returning a non-optimal result.
 - Christofides uses exact subset-DP minimum-weight perfect matching to remain self-contained. This preserves the approximation guarantee but makes that step exponential in the number of odd-degree MST vertices, so it is an educational/small-instance implementation rather than a large-scale TSP engine.
 - The planarity test/embedding is explicitly delegated to NetworkX; face walking from an already-known embedding is native.
 - Contraction Hierarchies, Hub Labeling, and SPQR decomposition are not yet implemented.

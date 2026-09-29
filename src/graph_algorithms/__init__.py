@@ -32,6 +32,18 @@ from .cycles_and_dag import (
 )
 from .disjoint_set import DisjointSet
 from .flow import FlowResult, dinic, edmonds_karp, ford_fulkerson
+from .network_optimization import (
+    CirculationResult,
+    GomoryHuTree,
+    MinCostFlowResult,
+    MinCutResult,
+    feasible_circulation,
+    gomory_hu_tree,
+    min_cost_flow,
+    min_cost_max_flow,
+    min_cut,
+    minimum_st_cut,
+)
 from .matching import (
     blossom_maximum_cardinality_matching,
     gale_shapley,
@@ -65,9 +77,13 @@ from .tree_algorithms import (
 __all__ = [
     "BinaryLiftingLCA",
     "CentroidDecomposition",
+    "CirculationResult",
     "DisjointSet",
     "FlowResult",
+    "GomoryHuTree",
     "HeavyLightDecomposition",
+    "MinCostFlowResult",
+    "MinCutResult",
     "articulation_points",
     "astar",
     "bellman_ford",
@@ -86,11 +102,13 @@ __all__ = [
     "edmonds_karp",
     "euler_tour",
     "exact_chromatic_number",
+    "feasible_circulation",
     "floyd_warshall",
     "ford_fulkerson",
     "gale_shapley",
     "greedy_coloring",
     "greedy_set_cover",
+    "gomory_hu_tree",
     "has_cycle_directed",
     "has_cycle_undirected_dfs",
     "has_cycle_undirected_dsu",
@@ -104,6 +122,10 @@ __all__ = [
     "kruskal",
     "kuhn_maximum_bipartite_matching",
     "metric_tsp_2approx",
+    "min_cost_flow",
+    "min_cost_max_flow",
+    "min_cut",
+    "minimum_st_cut",
     "prim",
     "reconstruct_path",
     "tarjan_offline_lca",

@@ -12,3 +12,7 @@ class DisconnectedGraphError(GraphAlgorithmError):
 
 class InvalidGraphError(GraphAlgorithmError):
     """Raised when graph input violates an algorithm's preconditions."""
+
+
+class InfeasibleFlowError(GraphAlgorithmError):
+    """Raised when the requested flow value cannot be routed feasibly."""
