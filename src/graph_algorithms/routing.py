@@ -371,3 +371,249 @@ def build_dense_hub_labels(ch: ContractionHierarchy) -> DenseHubLabels:
         for u in nodes
     }
     return DenseHubLabels(forward=forward, backward=backward)
+
+
+
+@dataclass(frozen=True)
+class CCHTopology:
+    """Metric-independent chordal completion for Customizable CH."""
+
+    order: tuple[Hashable, ...]
+    rank: dict[Hashable, int]
+    higher_neighbors: dict[Hashable, tuple[Hashable, ...]]
+    edges: tuple[tuple[Hashable, Hashable], ...]
+
+
+@dataclass
+class CustomizableContractionHierarchy:
+    """Basic Customizable Contraction Hierarchy for undirected graphs.
+
+    The topology is built once from an elimination order. customize() can then
+    be called repeatedly for new non-negative edge weights without rebuilding
+    the chordal completion.
+    """
+
+    topology: CCHTopology
+    weights: dict[tuple[Hashable, Hashable], float]
+    witness: dict[tuple[Hashable, Hashable], Hashable | None]
+
+    def _key(
+        self, a: Hashable, b: Hashable
+    ) -> tuple[Hashable, Hashable]:
+        rank = self.topology.rank
+        if rank[a] < rank[b]:
+            return a, b
+        return b, a
+
+    def _expand(
+        self, a: Hashable, b: Hashable
+    ) -> list[Hashable]:
+        key = self._key(a, b)
+        middle = self.witness.get(key)
+        if middle is None:
+            return [a, b]
+        left = self._expand(a, middle)
+        right = self._expand(middle, b)
+        return left[:-1] + right
+
+    def query(
+        self, source: Hashable, target: Hashable
+    ) -> tuple[float, list[Hashable]] | None:
+        """Exact shortest path by two upward Dijkstra searches."""
+        rank = self.topology.rank
+        if source not in rank or target not in rank:
+            raise KeyError("source and target must be hierarchy nodes")
+        if source == target:
+            return 0.0, [source]
+
+        upward = {
+            u: [
+                (v, self.weights[self._key(u, v)])
+                for v in self.topology.higher_neighbors[u]
+                if not math.isinf(self.weights[self._key(u, v)])
+            ]
+            for u in self.topology.order
+        }
+
+        def run(start: Hashable):
+            dist = {start: 0.0}
+            prev: dict[Hashable, Hashable] = {}
+            heap: list[tuple[float, int, Hashable]] = [(0.0, 0, start)]
+            serial = 1
+            while heap:
+                d, _, u = heapq.heappop(heap)
+                if d != dist.get(u):
+                    continue
+                for v, weight in upward[u]:
+                    nd = d + weight
+                    if nd < dist.get(v, math.inf):
+                        dist[v] = nd
+                        prev[v] = u
+                        heapq.heappush(heap, (nd, serial, v))
+                        serial += 1
+            return dist, prev
+
+        ds, ps = run(source)
+        dt, pt = run(target)
+        common = set(ds) & set(dt)
+        if not common:
+            return None
+        meet = min(common, key=lambda u: ds[u] + dt[u])
+        best = ds[meet] + dt[meet]
+
+        left_pairs: list[tuple[Hashable, Hashable]] = []
+        cur = meet
+        while cur != source:
+            parent = ps[cur]
+            left_pairs.append((parent, cur))
+            cur = parent
+        left_pairs.reverse()
+
+        right_pairs: list[tuple[Hashable, Hashable]] = []
+        cur = meet
+        while cur != target:
+            parent = pt[cur]
+            # pt follows target -> higher rank. Reverse orientation for meet -> target.
+            right_pairs.append((cur, parent))
+            cur = parent
+        right_pairs = [(b, a) for a, b in reversed(right_pairs)]
+
+        path: list[Hashable] = [source]
+        for a, b in left_pairs + right_pairs:
+            expanded = self._expand(a, b)
+            if path[-1] != expanded[0]:
+                raise AssertionError("CCH shortcut expansion produced a broken path")
+            path.extend(expanded[1:])
+        return best, path
+
+
+def build_cch_topology(
+    graph: WeightedGraph[Node],
+    order: Sequence[Node],
+) -> CCHTopology:
+    """Build metric-independent CCH topology by elimination/fill.
+
+    This educational implementation uses the supplied elimination order and
+    explicit clique fill among higher-ranked neighbors.
+    """
+    nodes = list(graph)
+    seen = set(nodes)
+    for neighbors in graph.values():
+        for v, _ in neighbors:
+            if v not in seen:
+                seen.add(v)
+                nodes.append(v)
+
+    order_tuple = tuple(order)
+    if len(order_tuple) != len(nodes) or set(order_tuple) != set(nodes):
+        raise ValueError("order must contain every graph node exactly once")
+    rank = {u: i for i, u in enumerate(order_tuple)}
+
+    neighbors: dict[Hashable, set[Hashable]] = {u: set() for u in nodes}
+    for u in nodes:
+        for v, weight in graph.get(u, ()):
+            if weight < 0:
+                raise ValueError("CCH requires non-negative edge weights")
+            if u == v:
+                continue
+            neighbors[u].add(v)
+            neighbors[v].add(u)
+
+    edges: set[tuple[Hashable, Hashable]] = set()
+
+    def key(a: Hashable, b: Hashable):
+        return (a, b) if rank[a] < rank[b] else (b, a)
+
+    for u in nodes:
+        for v in neighbors[u]:
+            edges.add(key(u, v))
+
+    for x in order_tuple:
+        higher = [v for v in neighbors[x] if rank[v] > rank[x]]
+        for i, u in enumerate(higher):
+            for v in higher[i + 1 :]:
+                if v not in neighbors[u]:
+                    neighbors[u].add(v)
+                    neighbors[v].add(u)
+                edges.add(key(u, v))
+
+    higher_neighbors = {
+        u: tuple(
+            sorted(
+                (v for v in neighbors[u] if rank[v] > rank[u]),
+                key=lambda v: rank[v],
+            )
+        )
+        for u in order_tuple
+    }
+    return CCHTopology(
+        order=order_tuple,
+        rank=rank,
+        higher_neighbors=higher_neighbors,
+        edges=tuple(
+            sorted(edges, key=lambda e: (rank[e[0]], rank[e[1]]))
+        ),
+    )
+
+
+def customize_contraction_hierarchy(
+    topology: CCHTopology,
+    graph: WeightedGraph[Node],
+) -> CustomizableContractionHierarchy:
+    """Customize a prebuilt CCH topology for a particular edge-weight metric."""
+    rank = topology.rank
+
+    def key(a: Hashable, b: Hashable):
+        return (a, b) if rank[a] < rank[b] else (b, a)
+
+    weights = {edge: math.inf for edge in topology.edges}
+    witness: dict[
+        tuple[Hashable, Hashable], Hashable | None
+    ] = {edge: None for edge in topology.edges}
+
+    for u in topology.order:
+        for v, raw_weight in graph.get(u, ()):
+            weight = float(raw_weight)
+            if weight < 0:
+                raise ValueError("CCH requires non-negative edge weights")
+            if u == v:
+                continue
+            if v not in rank:
+                raise ValueError("metric graph contains a node outside the topology")
+            edge = key(u, v)
+            if edge not in weights:
+                raise ValueError(
+                    "metric graph contains an edge absent from CCH topology"
+                )
+            weights[edge] = min(weights[edge], weight)
+
+    for x in topology.order:
+        higher = topology.higher_neighbors[x]
+        for i, u in enumerate(higher):
+            xu = key(x, u)
+            if math.isinf(weights[xu]):
+                continue
+            for v in higher[i + 1 :]:
+                xv = key(x, v)
+                if math.isinf(weights[xv]):
+                    continue
+                uv = key(u, v)
+                candidate = weights[xu] + weights[xv]
+                if candidate < weights[uv] - 1e-12:
+                    weights[uv] = candidate
+                    witness[uv] = x
+
+    return CustomizableContractionHierarchy(
+        topology=topology,
+        weights=weights,
+        witness=witness,
+    )
+
+
+def build_customizable_contraction_hierarchy(
+    graph: WeightedGraph[Node],
+    order: Sequence[Node],
+) -> CustomizableContractionHierarchy:
+    """Convenience wrapper for CCH topology construction + customization."""
+    topology = build_cch_topology(graph, order)
+    return customize_contraction_hierarchy(topology, graph)

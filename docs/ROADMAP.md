@@ -48,15 +48,18 @@ Completed:
 - exact unpruned CH-derived hub labels
 - greedy weighted spanner
 
+Completed additionally:
+
+- Customizable Contraction Hierarchies (educational topology/customization split)
+- effective-resistance spectral sparsification baseline
+
 Next:
 
-- Customizable Contraction Hierarchies
 - pruned/optimized Hub Labeling
 - Arc Flags
 - multi-level Dijkstra
 - Baswana-Sen randomized spanner
 - Benczur-Karger cut sparsification
-- spectral sparsification
 - low-stretch spanning trees
 - expander-decomposition interfaces
 
@@ -86,8 +89,14 @@ Still optional:
 Document first, implement only with the required supporting machinery:
 
 - deterministic almost-linear global min-cut
+- directed global min-cut via partial sparsification
+- faster approximate/exact Gomory-Hu tree constructions
+- randomized and deterministic near-linear negative-weight SSSP
 - almost-linear exact max-flow/min-cost-flow
 - incremental SCC / shortest path / flow
 - decremental min-cost flow / SCC
 - advanced dynamic sparsifiers and expander hierarchies
 - Babai-style quasipolynomial graph isomorphism
+
+
+The dated research index is maintained in [LAST_DECADE_2016_2026.md](LAST_DECADE_2016_2026.md); new theory results are added there before any claim of native implementation is made.

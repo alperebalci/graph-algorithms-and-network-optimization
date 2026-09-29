@@ -8,7 +8,7 @@ The goal of this document is to keep the 2016–2026 landscape visible without p
 
 ### Customizable routing
 
-The repository contains a native, exact educational Contraction Hierarchy plus dense CH-derived hub labels. The next routing target is **Customizable Contraction Hierarchies (CCH)**.
+The repository contains native educational implementations of exact Contraction Hierarchies, dense CH-derived hub labels, and a metric-independent **Customizable Contraction Hierarchy (CCH)** topology/customization split.
 
 Dibbelt, Strasser, and Wagner's *Customizable Contraction Hierarchies* appeared in ACM Journal of Experimental Algorithmics in 2016. CCH separates topology preprocessing from a lightweight metric-customization phase and uses nested-dissection orders, which is useful when road-network edge weights change frequently.
 
@@ -70,3 +70,48 @@ Several modern breakthroughs depend on reusable primitives. The preferred implem
 6. only then research-grade incremental/decremental algorithms.
 
 This avoids presenting a complexity theorem as if it were a small standalone routine.
+
+
+### Negative-weight SSSP in near-linear time (2022)
+
+Bernstein, Nanongkai, and Wulff-Nilsen gave a randomized near-linear-time algorithm for directed single-source shortest paths with integral negative edge weights, resolving a long-standing barrier for general negative-weight SSSP.
+
+- arXiv: https://arxiv.org/abs/2203.03456
+
+### Directed global min-cut via partial sparsification (2021)
+
+Cen, Li, Nanongkai, Panigrahi, Quanrud, and Saranurak improved the long-standing directed global min-cut bound by reducing the problem to substantially fewer max-flow calls using partial sparsification.
+
+- arXiv: https://arxiv.org/abs/2111.08959
+
+### Approximate Gomory-Hu trees faster than n-1 max flows (2021)
+
+Li and Panigrahi gave a randomized (1+epsilon)-approximate Gomory-Hu tree algorithm using only polylogarithmically many max-flow computations, breaking the classical n-1-max-flow barrier for approximation.
+
+- arXiv: https://arxiv.org/abs/2111.02022
+
+### Deterministic almost-linear exact flow (2023)
+
+van den Brand, Chen, Kyng, Liu, Peng, Probst Gutenberg, Sachdeva, and Sidford derandomized the almost-linear-time exact maximum-flow/minimum-cost-flow framework for polynomially bounded integral data.
+
+- arXiv: https://arxiv.org/abs/2309.16629
+
+### Parallel negative-weight SSSP (2024)
+
+Fischer, Haeupler, Latypov, Roeyskoe, and Sulser gave a parallel negative-weight SSSP algorithm with near-linear work and sublinear span.
+
+- arXiv: https://arxiv.org/abs/2410.20959
+
+### Deterministic nearly-linear negative-weight SSSP (2025)
+
+Haeupler, Jiang, and Saranurak gave the first deterministic nearly-linear-time algorithm for directed SSSP with negative integral edge weights, introducing directed path covers as a new structural primitive.
+
+- arXiv: https://arxiv.org/abs/2511.08551
+
+### Dynamic connectivity worst-case progress (2025)
+
+Meierhans and Probst Gutenberg obtained expected polylogarithmic worst-case update time for dynamic connectivity, using a hierarchy that interleaves vertex and edge sparsification.
+
+- arXiv: https://arxiv.org/abs/2510.08297
+
+See [LAST_DECADE_2016_2026.md](LAST_DECADE_2016_2026.md) for a year-by-year index.

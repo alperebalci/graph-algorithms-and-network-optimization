@@ -71,15 +71,24 @@ from .matching import (
     kuhn_maximum_bipartite_matching,
 )
 from .routing import (
+    CCHTopology,
     ContractionHierarchy,
+    CustomizableContractionHierarchy,
     DenseHubLabels,
     LandmarkIndex,
     alt_shortest_path,
+    build_cch_topology,
     build_contraction_hierarchy,
+    build_customizable_contraction_hierarchy,
     build_dense_hub_labels,
     build_landmark_index,
+    customize_contraction_hierarchy,
 )
 from .spanners import greedy_spanner
+from .sparsification import (
+    SpectralSparsifierResult,
+    effective_resistance_sparsifier,
+)
 from .references import (
     leiden_communities_reference,
     louvain_communities_reference,
@@ -120,6 +129,13 @@ from .tree_algorithms import (
 
 __all__ = [
     "BinaryLiftingLCA",
+    "CCHTopology",
+    "CustomizableContractionHierarchy",
+    "SpectralSparsifierResult",
+    "build_cch_topology",
+    "build_customizable_contraction_hierarchy",
+    "customize_contraction_hierarchy",
+    "effective_resistance_sparsifier",
     "ContractionHierarchy",
     "DenseHubLabels",
     "LandmarkIndex",

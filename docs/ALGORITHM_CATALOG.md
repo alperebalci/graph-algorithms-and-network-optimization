@@ -26,9 +26,10 @@ Status meanings:
 | Advanced routing | ALT / Landmark A* | Native | landmark lower bounds + A* |
 | Advanced routing | Contraction Hierarchies | Native | exact, naive witness-search educational implementation |
 | Advanced routing | Dense CH Hub Labeling | Native | exact unpruned 2-hop labels derived from CH |
-| Advanced routing | Customizable Contraction Hierarchies | Roadmap | topology preprocessing + metric customization |
+| Advanced routing | Customizable Contraction Hierarchies | Native | metric-independent fill topology + repeatable basic customization |
 | Advanced routing | Optimized Hub Labeling | Roadmap | pruning/order engineering for compact labels |
 | Sparse graphs | Greedy weighted spanner | Native | t-spanner by shortest-path edge filtering |
+| Sparse graphs | Effective-resistance spectral sparsifier | Native optional | dense Laplacian pseudoinverse + leverage-score sampling |
 | MST | Prim | Native | `O(E log V)` |
 | MST | Kruskal | Native | `O(E log E)` + DSU |
 | MST | Boruvka | Native | `O(E log V)` |
@@ -103,3 +104,8 @@ Status meanings:
 ## Why some advanced entries remain roadmap items
 
 The repository favors complete, testable implementations over name coverage. Contraction Hierarchies, Hub Labeling, and SPQR decomposition require non-trivial preprocessing invariants and deserve their own focused benchmark/test suites. They are explicitly tracked rather than represented by placeholders that merely raise `NotImplementedError`.
+
+
+## Research-frontier results tracked separately
+
+The catalog above lists executable algorithms. Complexity breakthroughs that require substantial modern machinery are indexed in [LAST_DECADE_2016_2026.md](LAST_DECADE_2016_2026.md) and [MODERN_RESEARCH_FRONTIER.md](MODERN_RESEARCH_FRONTIER.md), including 2021 directed/global min-cut advances, 2022–2025 negative-weight SSSP breakthroughs, deterministic almost-linear exact flow, and modern incremental/decremental graph algorithms.
