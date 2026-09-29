@@ -1,6 +1,16 @@
 """Classical graph algorithms and network optimization primitives."""
 
 from .advanced_shortest_paths import bidirectional_dijkstra
+from .analytics import (
+    brandes_betweenness_centrality,
+    core_numbers,
+    hits,
+    pagerank,
+)
+from .dag_algorithms import transitive_closure, transitive_reduction_dag
+from .dominators import lengauer_tarjan_dominators
+from .dynamic_graphs import RollbackDisjointSet, offline_dynamic_connectivity
+from .eulerian import hierholzer_eulerian_path
 from .approximation import (
     christofides_tsp,
     greedy_set_cover,
@@ -31,7 +41,13 @@ from .cycles_and_dag import (
     topological_sort_kahn,
 )
 from .disjoint_set import DisjointSet
-from .flow import FlowResult, dinic, edmonds_karp, ford_fulkerson
+from .flow import FlowResult, dinic, edmonds_karp, ford_fulkerson, push_relabel
+from .link_cut_tree import LinkCutTree
+from .mincuts import (
+    GlobalMinCutResult,
+    karger_stein_min_cut,
+    stoer_wagner_min_cut,
+)
 from .network_optimization import (
     CirculationResult,
     GomoryHuTree,
@@ -51,6 +67,13 @@ from .matching import (
     hungarian,
     kuhn_maximum_bipartite_matching,
 )
+from .references import (
+    leiden_communities_reference,
+    louvain_communities_reference,
+    network_simplex_reference,
+    vf2pp_isomorphism_reference,
+    weighted_blossom_matching_reference,
+)
 from .shortest_paths import (
     astar,
     bellman_ford,
@@ -59,7 +82,15 @@ from .shortest_paths import (
     johnson,
     reconstruct_path,
 )
-from .spanning_trees import kruskal, prim
+from .shortest_paths_extra import (
+    dag_shortest_paths,
+    dial_shortest_paths,
+    suurballe_two_edge_disjoint_paths,
+    yen_k_shortest_paths,
+    zero_one_bfs,
+)
+from .spanning_trees import boruvka, kruskal, prim
+from .structural import BlockCutForest, BlockNode, block_cut_forest
 from .traversal import (
     bfs_order,
     bidirectional_bfs_path,
@@ -76,6 +107,35 @@ from .tree_algorithms import (
 
 __all__ = [
     "BinaryLiftingLCA",
+    "BlockCutForest",
+    "BlockNode",
+    "GlobalMinCutResult",
+    "LinkCutTree",
+    "RollbackDisjointSet",
+    "block_cut_forest",
+    "boruvka",
+    "brandes_betweenness_centrality",
+    "core_numbers",
+    "dag_shortest_paths",
+    "dial_shortest_paths",
+    "hierholzer_eulerian_path",
+    "hits",
+    "karger_stein_min_cut",
+    "leiden_communities_reference",
+    "lengauer_tarjan_dominators",
+    "louvain_communities_reference",
+    "network_simplex_reference",
+    "offline_dynamic_connectivity",
+    "pagerank",
+    "push_relabel",
+    "stoer_wagner_min_cut",
+    "suurballe_two_edge_disjoint_paths",
+    "transitive_closure",
+    "transitive_reduction_dag",
+    "vf2pp_isomorphism_reference",
+    "weighted_blossom_matching_reference",
+    "yen_k_shortest_paths",
+    "zero_one_bfs",
     "CentroidDecomposition",
     "CirculationResult",
     "DisjointSet",

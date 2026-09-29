@@ -20,22 +20,31 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - Johnson's all-pairs algorithm
 - A*
 - Bidirectional Dijkstra
+- 0-1 BFS, Dial's algorithm, and DAG shortest paths
+- Yen k-shortest loopless paths
+- Suurballe two edge-disjoint shortest paths
 
 ### Spanning trees, cycles, DAGs, and connectivity
 
-- Prim and Kruskal MST
+- Prim, Kruskal, and Boruvka MST
 - Union-Find / Disjoint Set Union
 - Directed and undirected cycle detection
 - Kahn and DFS topological sorting
 - Connected components
 - Kosaraju SCC and Tarjan SCC
-- Bridges, articulation points, and biconnected components
+- Bridges, articulation points, biconnected components, and block-cut forests
+- Transitive closure and DAG transitive reduction
+- Lengauer-Tarjan immediate dominators
+- Hierholzer Euler paths/circuits
 
 ### Network flow and matching
 
 - Ford-Fulkerson
 - Edmonds-Karp
 - Dinic
+- Push-Relabel / Preflow-Push
+- Stoer-Wagner deterministic global min-cut
+- Karger-Stein randomized global min-cut
 - Minimum s-t cut
 - Minimum-cost flow for a prescribed flow value
 - Minimum-cost maximum flow
@@ -46,6 +55,16 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - Hungarian assignment
 - Edmonds blossom for unweighted maximum-cardinality matching in general graphs
 - Gale-Shapley stable matching
+
+### Dynamic graphs and analytics
+
+- Rollback DSU and offline dynamic connectivity
+- Link-Cut Tree with link/cut/connectivity/path-sum operations
+- PageRank and HITS
+- Brandes betweenness centrality
+- k-core decomposition
+- NetworkX reference adapters for weighted Blossom, Network Simplex, VF2++, and Louvain
+- Optional igraph/leidenalg reference adapter for Leiden community detection
 
 ### Coloring
 
@@ -145,6 +164,16 @@ src/graph_algorithms/
   traversal.py
   shortest_paths.py
   advanced_shortest_paths.py
+  shortest_paths_extra.py
+  dag_algorithms.py
+  dominators.py
+  eulerian.py
+  mincuts.py
+  structural.py
+  dynamic_graphs.py
+  link_cut_tree.py
+  analytics.py
+  references.py
   spanning_trees.py
   cycles_and_dag.py
   connectivity.py
@@ -177,7 +206,7 @@ A new algorithm should not enter the catalog as “Native” until it has at lea
 - The min-cost routines use successive shortest augmenting paths with Bellman-Ford. They support negative edge costs but reject a reachable negative-cost residual cycle instead of silently returning a non-optimal result.
 - Christofides uses exact subset-DP minimum-weight perfect matching to remain self-contained. This preserves the approximation guarantee but makes that step exponential in the number of odd-degree MST vertices, so it is an educational/small-instance implementation rather than a large-scale TSP engine.
 - The planarity test/embedding is explicitly delegated to NetworkX; face walking from an already-known embedding is native.
-- Contraction Hierarchies, Hub Labeling, and SPQR decomposition are not yet implemented.
+- Contraction Hierarchies, Customizable Contraction Hierarchies, Hub Labeling, SPQR decomposition, native weighted Blossom, cost-scaling min-cost flow, and native Network Simplex remain advanced roadmap items; reference adapters are used where explicitly documented.
 
 ## License
 
