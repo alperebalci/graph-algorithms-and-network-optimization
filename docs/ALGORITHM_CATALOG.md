@@ -33,6 +33,8 @@ Status meanings:
 | MST | Prim | Native | `O(E log V)` |
 | MST | Kruskal | Native | `O(E log E)` + DSU |
 | MST | Boruvka | Native | `O(E log V)` |
+| Directed branching | Chu-Liu/Edmonds arborescence | Native | cycle contraction; directed MST analogue |
+| Cycle optimization | Karp minimum mean cycle | Native | `O(VE)` |
 | Eulerian | Hierholzer | Native | `O(V+E)`, directed/undirected, parallel-edge support |
 | Connectivity | Connected components | Native | `O(V+E)` |
 | Connectivity | Kosaraju SCC | Native | `O(V+E)` |
@@ -52,6 +54,9 @@ Status meanings:
 | DAG / reachability | Transitive closure | Native | repeated DFS |
 | DAG / reachability | Transitive reduction | Native | unique reduction for DAGs |
 | Directed structure | Lengauer-Tarjan dominators | Native | immediate dominators from a start vertex |
+| Chordal graphs | Maximum Cardinality Search | Native | MCS ordering + chordality recognition |
+| Cliques | Bron-Kerbosch with pivoting | Native | maximal clique enumeration |
+| Cliques | Maximum clique | Native exact | maximum over maximal cliques; exponential worst case |
 | Max flow | Ford-Fulkerson | Native | DFS augmenting paths; integer-capacity termination guarantee |
 | Max flow | Edmonds-Karp | Native | `O(VE^2)` |
 | Max flow | Dinic | Native | `O(V^2E)` general bound |

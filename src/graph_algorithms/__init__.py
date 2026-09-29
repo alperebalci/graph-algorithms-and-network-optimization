@@ -1,6 +1,14 @@
 """Classical graph algorithms and network optimization primitives."""
 
 from .advanced_shortest_paths import bidirectional_dijkstra
+from .arborescence import minimum_spanning_arborescence
+from .chordal import (
+    chordal_perfect_elimination_order,
+    is_chordal,
+    maximum_cardinality_search,
+)
+from .cliques import bron_kerbosch_maximal_cliques, maximum_clique
+from .cycle_optimization import minimum_cycle_mean
 from .analytics import (
     brandes_betweenness_centrality,
     core_numbers,
@@ -129,6 +137,13 @@ from .tree_algorithms import (
 
 __all__ = [
     "BinaryLiftingLCA",
+    "minimum_spanning_arborescence",
+    "chordal_perfect_elimination_order",
+    "is_chordal",
+    "maximum_cardinality_search",
+    "bron_kerbosch_maximal_cliques",
+    "maximum_clique",
+    "minimum_cycle_mean",
     "CCHTopology",
     "CustomizableContractionHierarchy",
     "SpectralSparsifierResult",

@@ -19,6 +19,10 @@ Completed:
 - transitive closure/reduction
 - Lengauer-Tarjan dominators
 - block-cut forest
+- Chu-Liu/Edmonds minimum arborescence
+- Karp minimum mean cycle
+- Maximum Cardinality Search / chordality recognition
+- Bron-Kerbosch maximal clique enumeration
 
 ## Phase B — dynamic and advanced structural layer
 

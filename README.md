@@ -28,9 +28,11 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - Customizable Contraction Hierarchies with reusable metric-independent topology
 - Dense CH-derived Hub Labeling
 
-### Spanning trees, cycles, DAGs, and connectivity
+### Spanning trees, directed branchings, cycles, DAGs, and connectivity
 
 - Prim, Kruskal, and Boruvka MST
+- Chu-Liu/Edmonds minimum spanning arborescence
+- Karp minimum mean cycle
 - Union-Find / Disjoint Set Union
 - Directed and undirected cycle detection
 - Kahn and DFS topological sorting
@@ -40,6 +42,8 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - Transitive closure and DAG transitive reduction
 - Lengauer-Tarjan immediate dominators
 - Hierholzer Euler paths/circuits
+- Maximum Cardinality Search and chordality recognition
+- Bron-Kerbosch maximal cliques and exact maximum clique
 
 ### Network flow and matching
 
@@ -172,6 +176,10 @@ More examples are in [`examples/`](examples/).
 
 ```text
 src/graph_algorithms/
+  arborescence.py
+  cycle_optimization.py
+  chordal.py
+  cliques.py
   traversal.py
   shortest_paths.py
   advanced_shortest_paths.py
