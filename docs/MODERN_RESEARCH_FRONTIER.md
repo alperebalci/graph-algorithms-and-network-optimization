@@ -115,3 +115,56 @@ Meierhans and Probst Gutenberg obtained expected polylogarithmic worst-case upda
 - arXiv: https://arxiv.org/abs/2510.08297
 
 See [LAST_DECADE_2016_2026.md](LAST_DECADE_2016_2026.md) for a year-by-year index.
+
+
+## 2026 update — through 2026-09-30
+
+The 2026 frontier moved substantially in shortest paths, flow, dynamic graphs, streaming coloring, and sparsification-based methods.
+
+### Real-weight Bellman-Ford reaches almost-linear time
+
+Hair, George Z. Li, Jason Li, and Junkai Zhang give an `m^(1+o(1)))-time algorithm for directed SSSP with real-valued, possibly negative edge weights.
+
+- arXiv: https://arxiv.org/abs/2607.19346
+
+This is stronger in weight generality than the earlier integral-weight negative-SSSP results and is kept as a research-frontier entry rather than a misleading lightweight reimplementation.
+
+### Dense negative-weight SSSP
+
+Li, Li, and Zhang obtain `n^(2+o(1))) time for dense directed graphs with real-valued possibly negative edge weights.
+
+- arXiv: https://arxiv.org/abs/2602.16153
+- FOCS 2026: accepted; conference scheduled for November 2026.
+
+### Expander decomposition and approximate max flow
+
+Fleischmann, George Z. Li, and Jason Li improve weak expander decompositions and use them to obtain a faster non-recursive approximate max-flow framework.
+
+- DOI: https://doi.org/10.4230/LIPIcs.ICALP.2026.91
+
+### Streaming coloring beyond Brooks
+
+Flin and Halldórsson give a one-pass semi-streaming algorithm for `(Delta-1)` coloring in the sufficiently-high-degree/no-`Delta`-clique regime.
+
+- DOI: https://doi.org/10.4230/LIPIcs.ICALP.2026.92
+
+### Directed global min-cut approximation
+
+Mosenzon gives almost-optimal randomized `(1+epsilon)` approximation algorithms for directed global edge/vertex min-cut in `m^(1+o(1))/epsilon` time under polynomially bounded weights.
+
+- arXiv: https://arxiv.org/abs/2512.09080
+- STOC 2026 result.
+
+### FOCS 2026 accepted graph-algorithm results
+
+As of this coverage date, FOCS 2026 is still upcoming (November 8–11, 2026), but its accepted-paper list already includes several results relevant to this repository:
+
+- combinatorial minimum-cost flow in almost-linear time on dense graphs;
+- almost-optimal 2-approximate APSP;
+- polynomial-time next-to-shortest path in positively weighted digraphs;
+- dynamic connectivity, MST, and 2-edge connectivity with polylogarithmic worst-case update time;
+- parallel reachability faster than transitive closure.
+
+Accepted-paper index: https://focs.computer.org/2026/accepted-papers/
+
+The dated summary is maintained in [LAST_DECADE_2016_2026.md](LAST_DECADE_2016_2026.md).

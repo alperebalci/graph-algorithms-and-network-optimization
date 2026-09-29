@@ -107,3 +107,17 @@ Document first, implement only with the required supporting machinery:
 
 
 The dated research index is maintained in [LAST_DECADE_2016_2026.md](LAST_DECADE_2016_2026.md); new theory results are added there before any claim of native implementation is made.
+
+
+## 2026 frontier intake
+
+Research results tracked as of 2026-09-30, without pretending they are compact textbook routines:
+
+- real-valued negative-weight SSSP in `m^(1+o(1))`;
+- dense negative-weight SSSP in `n^(2+o(1))`;
+- faster weak expander decompositions and approximate max flow;
+- semi-streaming `(Delta-1)` coloring beyond Brooks;
+- almost-optimal directed global min-cut approximation;
+- accepted FOCS 2026 advances in dense combinatorial min-cost flow, 2-approximate APSP, next-to-shortest paths, dynamic connectivity/MST/2-edge connectivity, and parallel reachability.
+
+Before native implementations are attempted, the missing infrastructure is prioritized as: stronger sparsification primitives, low-stretch trees, expander-decomposition interfaces, Euler-tour-tree-style dynamic forests, and richer dynamic shortest-path/flow scaffolding.

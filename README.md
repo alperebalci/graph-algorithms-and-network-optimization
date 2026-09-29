@@ -106,7 +106,7 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 - Heavy-light decomposition
 - Centroid decomposition
 
-See [`docs/ALGORITHM_CATALOG.md`](docs/ALGORITHM_CATALOG.md) for status and complexity, [`docs/ROADMAP.md`](docs/ROADMAP.md) for staged implementation priorities, [`docs/MODERN_RESEARCH_FRONTIER.md`](docs/MODERN_RESEARCH_FRONTIER.md) for research context, and [`docs/LAST_DECADE_2016_2026.md`](docs/LAST_DECADE_2016_2026.md) for the curated decade timeline.
+See [`docs/ALGORITHM_CATALOG.md`](docs/ALGORITHM_CATALOG.md) for status and complexity, [`docs/ROADMAP.md`](docs/ROADMAP.md) for staged implementation priorities, [`docs/MODERN_RESEARCH_FRONTIER.md`](docs/MODERN_RESEARCH_FRONTIER.md) for research context, and [`docs/LAST_DECADE_2016_2026.md`](docs/LAST_DECADE_2016_2026.md) for the curated decade timeline, updated through **2026-09-30**.
 
 ## Taxonomy corrections
 
