@@ -89,6 +89,7 @@ Status meanings:
 | Approximation | Metric TSP double-tree | Native | 2-approximation under triangle inequality |
 | Approximation | Christofides | Native | 1.5-approximation; MWPM step uses exact subset DP in this educational implementation |
 | Approximation | Greedy Set Cover | Native | `H_n` approximation; not graph-specific |
+| Submodular optimization | Greedy Maximum Coverage | Native | monotone cardinality-constrained `(1-1/e)` guarantee; exact enumeration oracle for small instances |
 | Approximation | Minimum Vertex Cover | Native | maximal-matching 2-approximation |
 | Bipartite optimization | Minimum Vertex Cover (Konig) | Native exact | Hopcroft-Karp + alternating reachability |
 | Approximation | Weighted Max-Cut local search | Native | 1-flip local optimum gives 1/2 approximation |

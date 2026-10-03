@@ -134,6 +134,13 @@ from .shortest_paths_extra import (
 )
 from .spanning_trees import boruvka, kruskal, prim
 from .steiner import SteinerTreeResult, steiner_tree_2approx
+from .submodular import (
+    CoverageResult,
+    coverage_value,
+    exact_maximum_coverage,
+    greedy_maximum_coverage,
+    marginal_gain,
+)
 from .structural import BlockCutForest, BlockNode, block_cut_forest
 from .traversal import (
     bfs_order,
@@ -154,6 +161,11 @@ __all__ = [
     "MaxCutResult",
     "ChinesePostmanResult",
     "SteinerTreeResult",
+    "CoverageResult",
+    "coverage_value",
+    "exact_maximum_coverage",
+    "greedy_maximum_coverage",
+    "marginal_gain",
     "konig_minimum_vertex_cover",
     "max_cut_local_search",
     "vertex_cover_2approx",
