@@ -134,7 +134,7 @@ from .shortest_paths_extra import (
 )
 from .spanning_trees import boruvka, kruskal, prim
 from .steiner import SteinerTreeResult, steiner_tree_2approx
-from .structural import BlockCutForest, BlockNode, block_cut_forest
+from .submodular import (\n    CoverageResult,\n    coverage_value,\n    exact_maximum_coverage,\n    greedy_maximum_coverage,\n    marginal_gain,\n)\nfrom .structural import BlockCutForest, BlockNode, block_cut_forest
 from .traversal import (
     bfs_order,
     bidirectional_bfs_path,
@@ -153,8 +153,7 @@ __all__ = [
     "BinaryLiftingLCA",
     "MaxCutResult",
     "ChinesePostmanResult",
-    "SteinerTreeResult",
-    "konig_minimum_vertex_cover",
+    "SteinerTreeResult",\n    "CoverageResult",\n    "coverage_value",\n    "exact_maximum_coverage",\n    "greedy_maximum_coverage",\n    "marginal_gain",\n    "konig_minimum_vertex_cover",
     "max_cut_local_search",
     "vertex_cover_2approx",
     "undirected_chinese_postman",
