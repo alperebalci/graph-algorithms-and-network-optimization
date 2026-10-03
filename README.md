@@ -94,8 +94,7 @@ The repository is designed as the classical-algorithm counterpart to learning-ba
 
 - Metric TSP double-tree 2-approximation
 - Christofides 1.5-approximation
-- Greedy Set Cover
-- 2-approximation for Minimum Vertex Cover
+- Greedy Set Cover\n- Greedy monotone submodular Maximum Coverage under a cardinality budget with exact small-instance oracle\n- 2-approximation for Minimum Vertex Cover
 - Exact bipartite Minimum Vertex Cover via Konig + Hopcroft-Karp
 - Deterministic 1-flip 1/2-approximation for weighted Max-Cut
 - Metric-closure 2-approximation for Steiner Tree
